@@ -1,0 +1,7 @@
+source,source_type,relation,target,target_type,weight,evidence,persistence_days
+rye,cover,inhibits,pigweed,weed,0.8,field_trial,90
+rye,cover,inhibits,foxtail,weed,0.6,literature,75
+mustard,cover,inhibits,pigweed,weed,0.7,literature,60
+mustard,cover,releases,glucosinolate,allelochemical,0.9,literature,45
+clover,cover,tolerates,corn,crop,0.4,field_trial,30
+clover,cover,degrades,glucosinolate,allelochemical,0.3,lab,20

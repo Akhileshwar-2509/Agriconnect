@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>AlleloCrop Advisor</title>
+  <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body>
+  <div class="container">
+    <h1>AlleloCrop Advisor</h1>
+    <div id="app"></div>
+  </div>
+  <script src="/static/js/app.js"></script>
+  <script>
+    // Simple CSV and PDF download buttons after results are available
+    window.addEventListener('click', async (e) => {
+      if (e.target && e.target.id === 'download-pdf' && window.__lastPlans) {
+        const res = await fetch('/export/pdf', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ scenario_name: 'scenario', inputs: {}, plans: window.__lastPlans })});
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'allelocrop_plan.pdf'; a.click(); URL.revokeObjectURL(url);
+      }
+      if (e.target && e.target.id === 'download-csv' && window.__lastPlans) {
+        const res = await fetch('/export/csv', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ scenario_name: 'scenario', inputs: {}, plans: window.__lastPlans })});
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'allelocrop_plan.csv'; a.click(); URL.revokeObjectURL(url);
+      }
+    });
+  </script>
+</body>
+</html>
